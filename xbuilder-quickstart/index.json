@@ -6,24 +6,28 @@
   "details": {
     "steps": [
       {
-        "title": "Step 1",
+        "title": "Crea un proyecto maven",
         "text": "step1.md"
       },
       {
-        "title": "Step 2",
+        "title": "Instala XBuilder",
         "text": "step2.md"
       },
       {
-        "title": "Step 3",
+        "title": "Configura Xbuilder",
         "text": "step3.md"
       },
       {
-        "title": "Step 4",
+        "title": "Configura el reloj de XBuilder",
         "text": "step4.md"
       },
       {
-        "title": "Step 5",
+        "title": "Crea una Factura electrónica",
         "text": "step5.md"
+      },
+      {
+        "title": "Step 6",
+        "text": "step6.md"
       }
     ],
     "intro": {

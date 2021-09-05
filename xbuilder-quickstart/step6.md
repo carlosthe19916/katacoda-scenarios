@@ -1,0 +1,95 @@
+package io.github.project.openubl.quickstart.xbuilder;
+
+import io.github.project.openubl.xmlbuilderlib.clock.SystemClock;
+import io.github.project.openubl.xmlbuilderlib.config.Config;
+import io.github.project.openubl.xmlbuilderlib.facade.DocumentManager;
+import io.github.project.openubl.xmlbuilderlib.facade.DocumentWrapper;
+import io.github.project.openubl.xmlbuilderlib.models.catalogs.Catalog6;
+import io.github.project.openubl.xmlbuilderlib.models.input.common.ClienteInputModel;
+import io.github.project.openubl.xmlbuilderlib.models.input.common.ProveedorInputModel;
+import io.github.project.openubl.xmlbuilderlib.models.input.standard.DocumentLineInputModel;
+import io.github.project.openubl.xmlbuilderlib.models.input.standard.invoice.InvoiceInputModel;
+import io.github.project.openubl.xmlbuilderlib.models.output.standard.invoice.InvoiceOutputModel;
+import io.github.project.openubl.xmlbuilderlib.utils.CertificateDetails;
+import io.github.project.openubl.xmlbuilderlib.utils.CertificateDetailsFactory;
+import io.github.project.openubl.xmlbuilderlib.xml.XMLSigner;
+import io.github.project.openubl.xmlbuilderlib.xml.XmlSignatureHelper;
+import org.w3c.dom.Document;
+
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
+import java.security.*;
+import java.security.cert.X509Certificate;
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // Create XML
+        String xml = createUnsignedXML();
+
+        System.out.println("Your XML is:");
+        System.out.println(xml);
+
+        // Sign XML
+        Document signedXML = signXML(xml);
+
+        byte[] bytesFromDocument = XmlSignatureHelper.getBytesFromDocument(signedXML);
+        String signedXMLString = new String(bytesFromDocument, StandardCharsets.ISO_8859_1);
+
+        System.out.println("\n Your signed XML is:");
+        System.out.println(signedXMLString);
+    }
+
+    public static String createUnsignedXML() {
+        // General config
+        Config config = ConfigSingleton.getInstance().getConfig();
+        SystemClock clock = ConfigSingleton.getInstance().getClock();
+
+        // Invoice generation
+        InvoiceInputModel input = invoiceFactory();
+        DocumentWrapper<InvoiceOutputModel> result = DocumentManager.createXML(input, config, clock);
+        return result.getXml();
+    }
+
+    public static Document signXML(String xml) throws Exception {
+        InputStream ksInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("LLAMA-PE-CERTIFICADO-DEMO-12345678912.pfx");
+        CertificateDetails certificate = CertificateDetailsFactory.create(ksInputStream, "password");
+
+        X509Certificate x509Certificate = certificate.getX509Certificate();
+        PrivateKey privateKey = certificate.getPrivateKey();
+        return XMLSigner.signXML(xml, "Project OpenUBL", x509Certificate, privateKey);
+    }
+
+    public static InvoiceInputModel invoiceFactory() {
+        return InvoiceInputModel.Builder.anInvoiceInputModel()
+                .withSerie("F001")
+                .withNumero(1)
+                .withProveedor(ProveedorInputModel.Builder.aProveedorInputModel()
+                        .withRuc("12345678912")
+                        .withRazonSocial("Los grandes S.A.C.")
+                        .build()
+                )
+                .withCliente(ClienteInputModel.Builder.aClienteInputModel()
+                        .withNombre("Pepito Suarez")
+                        .withNumeroDocumentoIdentidad("12121212121")
+                        .withTipoDocumentoIdentidad(Catalog6.RUC.toString())
+                        .build()
+                )
+                .withDetalle(Arrays.asList(
+                        DocumentLineInputModel.Builder.aDocumentLineInputModel()
+                                .withDescripcion("Item1")
+                                .withCantidad(new BigDecimal(10))
+                                .withPrecioUnitario(new BigDecimal(100))
+                                .build(),
+                        DocumentLineInputModel.Builder.aDocumentLineInputModel()
+                                .withDescripcion("Item2")
+                                .withCantidad(new BigDecimal(10))
+                                .withPrecioUnitario(new BigDecimal(100))
+                                .build())
+                )
+                .build();
+    }
+
+}
