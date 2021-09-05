@@ -1,95 +1,11 @@
-package io.github.project.openubl.quickstart.xbuilder;
+- Ejecuta el proyecto usando el comando:
 
-import io.github.project.openubl.xmlbuilderlib.clock.SystemClock;
-import io.github.project.openubl.xmlbuilderlib.config.Config;
-import io.github.project.openubl.xmlbuilderlib.facade.DocumentManager;
-import io.github.project.openubl.xmlbuilderlib.facade.DocumentWrapper;
-import io.github.project.openubl.xmlbuilderlib.models.catalogs.Catalog6;
-import io.github.project.openubl.xmlbuilderlib.models.input.common.ClienteInputModel;
-import io.github.project.openubl.xmlbuilderlib.models.input.common.ProveedorInputModel;
-import io.github.project.openubl.xmlbuilderlib.models.input.standard.DocumentLineInputModel;
-import io.github.project.openubl.xmlbuilderlib.models.input.standard.invoice.InvoiceInputModel;
-import io.github.project.openubl.xmlbuilderlib.models.output.standard.invoice.InvoiceOutputModel;
-import io.github.project.openubl.xmlbuilderlib.utils.CertificateDetails;
-import io.github.project.openubl.xmlbuilderlib.utils.CertificateDetailsFactory;
-import io.github.project.openubl.xmlbuilderlib.xml.XMLSigner;
-import io.github.project.openubl.xmlbuilderlib.xml.XmlSignatureHelper;
-import org.w3c.dom.Document;
+`mvn -f xbuilder-quickstart compile exec:java -Dexec.mainClass="org.openubl.xbuilder.Main"`{{execute T1}}
 
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.nio.charset.StandardCharsets;
-import java.security.*;
-import java.security.cert.X509Certificate;
-import java.util.Arrays;
+Debes de poder ver un resultado como:
 
-public class Main {
+```shell
+Tu factura XML es:
 
-    public static void main(String[] args) throws Exception {
-        // Create XML
-        String xml = createUnsignedXML();
-
-        System.out.println("Your XML is:");
-        System.out.println(xml);
-
-        // Sign XML
-        Document signedXML = signXML(xml);
-
-        byte[] bytesFromDocument = XmlSignatureHelper.getBytesFromDocument(signedXML);
-        String signedXMLString = new String(bytesFromDocument, StandardCharsets.ISO_8859_1);
-
-        System.out.println("\n Your signed XML is:");
-        System.out.println(signedXMLString);
-    }
-
-    public static String createUnsignedXML() {
-        // General config
-        Config config = ConfigSingleton.getInstance().getConfig();
-        SystemClock clock = ConfigSingleton.getInstance().getClock();
-
-        // Invoice generation
-        InvoiceInputModel input = invoiceFactory();
-        DocumentWrapper<InvoiceOutputModel> result = DocumentManager.createXML(input, config, clock);
-        return result.getXml();
-    }
-
-    public static Document signXML(String xml) throws Exception {
-        InputStream ksInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("LLAMA-PE-CERTIFICADO-DEMO-12345678912.pfx");
-        CertificateDetails certificate = CertificateDetailsFactory.create(ksInputStream, "password");
-
-        X509Certificate x509Certificate = certificate.getX509Certificate();
-        PrivateKey privateKey = certificate.getPrivateKey();
-        return XMLSigner.signXML(xml, "Project OpenUBL", x509Certificate, privateKey);
-    }
-
-    public static InvoiceInputModel invoiceFactory() {
-        return InvoiceInputModel.Builder.anInvoiceInputModel()
-                .withSerie("F001")
-                .withNumero(1)
-                .withProveedor(ProveedorInputModel.Builder.aProveedorInputModel()
-                        .withRuc("12345678912")
-                        .withRazonSocial("Los grandes S.A.C.")
-                        .build()
-                )
-                .withCliente(ClienteInputModel.Builder.aClienteInputModel()
-                        .withNombre("Pepito Suarez")
-                        .withNumeroDocumentoIdentidad("12121212121")
-                        .withTipoDocumentoIdentidad(Catalog6.RUC.toString())
-                        .build()
-                )
-                .withDetalle(Arrays.asList(
-                        DocumentLineInputModel.Builder.aDocumentLineInputModel()
-                                .withDescripcion("Item1")
-                                .withCantidad(new BigDecimal(10))
-                                .withPrecioUnitario(new BigDecimal(100))
-                                .build(),
-                        DocumentLineInputModel.Builder.aDocumentLineInputModel()
-                                .withDescripcion("Item2")
-                                .withCantidad(new BigDecimal(10))
-                                .withPrecioUnitario(new BigDecimal(100))
-                                .build())
-                )
-                .build();
-    }
-
-}
+<?xml version="1.0" encoding="ISO-8859-1"?> <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:cec="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:sac="urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" > <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent/> </ext:UBLExtension> </ext:UBLExtensions>.......
+```

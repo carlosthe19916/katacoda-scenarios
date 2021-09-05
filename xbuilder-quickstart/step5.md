@@ -32,7 +32,7 @@ public class Main {
         DocumentWrapper<InvoiceOutputModel> result = DocumentManager.createXML(input, config, clock);
         String xml = result.getXml();
 
-        System.out.println("\n Your signed XML is:");
+        System.out.println("\n Tu factura XML es: \n" + xml);
     }
 
     public static InvoiceInputModel invoiceFactory() {
