@@ -42,5 +42,11 @@
   },
   "backend": {
     "imageid": "openjdk:11"
-  }
+  },
+  "files": [
+    "xbuilder-quickstart/pom.xml",
+    "xbuilder-quickstart/src/main/java/org/openubl/xbuilder/ConfigDefaults.java",
+    "xbuilder-quickstart/src/main/java/org/openubl/xbuilder/DefaultSystemClock.java",
+    "xbuilder-quickstart/src/main/java/org/openubl/xbuilder/Main.java",
+  ]
 }

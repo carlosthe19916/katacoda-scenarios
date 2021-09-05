@@ -3,7 +3,7 @@ Crea `DefaultSystemClock.java` para configurar el reloj de XBuilder. Puedes leer
 Ejecuta el comando:
 
 ```shell
-cat << EOF > xbuilder-quickstart/org/openubl/xbuilder/DefaultSystemClock.java
+cat << EOF > xbuilder-quickstart/src/main/java/org/openubl/xbuilder/DefaultSystemClock.java
 package org.openubl.xbuilder;
 
 import io.github.project.openubl.xmlbuilderlib.clock.SystemClock;
@@ -26,29 +26,3 @@ public class DefaultSystemClock implements SystemClock {
 }
 EOF
 ```{{execute}}
-
-### Verificar versión final
-La versión final del archivo `xbuilder-quickstart/org/openubl/xbuilder/DefaultSystemClock.java` debe de ser:
-
-```java
-package org.openubl.xbuilder;
-
-import io.github.project.openubl.xmlbuilderlib.clock.SystemClock;
-
-import java.util.Calendar;
-import java.util.TimeZone;
-
-public class DefaultSystemClock implements SystemClock {
-
-    @Override
-    public TimeZone getTimeZone() {
-        return TimeZone.getTimeZone("America/Lima");
-    }
-
-    @Override
-    public Calendar getCalendarInstance() {
-        return Calendar.getInstance();
-    }
-
-}
-````
