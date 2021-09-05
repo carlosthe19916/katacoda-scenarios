@@ -1,4 +1,4 @@
-Crea `ConfigDefaults.java` para configurar configurar XBuilder. Puedes leer la documentación https://project-openubl.github.io/docs/xbuilder/create-xml#crear-un-config
+Crea `ConfigDefaults.java` para configurar XBuilder. Puedes leer la documentación https://project-openubl.github.io/docs/xbuilder/create-xml#crear-un-config
 
 Ejecuta el comando:
 
