@@ -1,13 +1,7 @@
-`echo "Run in T1"`{{execute T1}}
+## Crea un proyecto Maven
 
-<pre>`echo "Run in T1"`{{execute T1}}</pre>
+`mvn archetype:generate -DgroupId=org.openubl.xbuilder -DartifactId=xbuilder-quickstart -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`{{execute T1}}
 
+Descripcion del proyecto:
 
-`echo "Run in T2"`{{execute T2}}
-
-<pre>`echo "Run in T2"`{{execute T2}}</pre>
-
-
-`echo "No Terminal Defined"`{{execute}}
-
-<pre>`echo "No Terminal Defined"`{{execute}}</pre>
+<pre>`mvn archetype:generate -DgroupId=org.openubl.xbuilder -DartifactId=xbuilder-quickstart -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`{{execute T1}}</pre>
