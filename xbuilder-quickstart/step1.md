@@ -6,7 +6,7 @@
 - Abre el archivo `xbuilder-quickstart/.pom.xml` y configura la versión de Java agregando las siguientes lineas debajo de `<url>http://maven.apache.org</url>`:
 
 ```xml
- <properties>
+<properties>
   <maven.compiler.source>1.8</maven.compiler.source>
   <maven.compiler.target>1.8</maven.compiler.target>
 </properties>
