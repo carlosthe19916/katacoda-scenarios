@@ -47,6 +47,6 @@
     "xbuilder-quickstart/pom.xml",
     "xbuilder-quickstart/src/main/java/org/openubl/xbuilder/ConfigDefaults.java",
     "xbuilder-quickstart/src/main/java/org/openubl/xbuilder/DefaultSystemClock.java",
-    "xbuilder-quickstart/src/main/java/org/openubl/xbuilder/Main.java",
+    "xbuilder-quickstart/src/main/java/org/openubl/xbuilder/Main.java"
   ]
 }
