@@ -18,9 +18,7 @@ Usaremos el terminal de comandos para crear nuestro proyecto [Maven](https://mav
 
 > Los `<properties/>` deben de ser insertados debajo de `<url>http://maven.apache.org</url>`
 
-La versión final debe de ser:
-
-Copy file to editor:
+### Versión final de pom.xml
 
 <pre class="file" data-filename="xbuilder-quickstart/pom.xml" data-target="replace">
 &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
