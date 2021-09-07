@@ -1,7 +1,3 @@
-XBuilder es una librería Java. Para su uso, recomendamos el uso de [Maven](https://maven.apache.org/) o [Gradle](https://gradle.org/) para la administración de dependencias. En este tutorial aprenderás a crear un proyecto [Maven](https://maven.apache.org/), instalar XBuilder, y finalmente crear tu primer XML producto de una factura electrónica.
-
-## Crea un proyecto Maven
-
 Usaremos el terminal de comandos para crear nuestro proyecto [Maven](https://maven.apache.org/). Haz click en el siguiente comando para ejecutarlo en el terminal.
 
 `mvn archetype:generate -DgroupId=org.openubl.xbuilder -DartifactId=xbuilder-quickstart -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`{{execute T1}}
@@ -26,8 +22,7 @@ La versión final debe de ser:
 
 Copy file to editor:
 
-<pre class="file" data-filename="xbuilder-quickstart/pom.xml" data-target="replace">
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<pre class="file" data-filename="xbuilder-quickstart/pom.xml" data-target="replace"><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openubl.xbuilder</groupId>
