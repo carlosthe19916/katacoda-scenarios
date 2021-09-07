@@ -65,3 +65,7 @@ public class ConfigDefaults implements Config {
 }
 EOF
 ```{{execute}}
+
+## Observa el contenido de ConfigDefaults.java
+
+Abre el archivo `xbuilder-quickstart/src/main/java/org/openubl/xbuilder/ConfigDefaults.java`{{open}} y analiza el contenido
